@@ -1,11 +1,12 @@
 {
     "name": "digital-creative/expandable-table-row",
-    "description": "Allows you to update a single column of a resource all at once.",
+    "description": "Provides an easy way to append extra data to each row of your resource tables.",
     "keywords": [
         "laravel",
         "nova",
-        "batch-edit",
-        "toolbar"
+        "nova4",
+        "expandable",
+        "table"
     ],
     "authors": [
         {
