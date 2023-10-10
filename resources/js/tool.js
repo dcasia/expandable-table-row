@@ -1,19 +1,30 @@
-import Toolbar from './components/Toolbar.vue'
+import Row from './components/Row.vue'
 import Toggler from './components/Toggler.vue'
 import { createVNode, render } from 'vue'
 
 Nova.booting(app => {
 
     app.mixin({
+        data() {
+            return {
+                toDestroy: [],
+            }
+        },
+        unmounted() {
+
+            for (const element of this.toDestroy) {
+                render(null, element)
+            }
+
+        },
         mounted() {
 
             if (this._.type?.__file?.endsWith('ResourceTableRow.vue')) {
 
                 const container = document.createElement('tr')
-                container.id = 'expandable-table-row'
 
-                const togglerContainer = document.createElement('div')
-                togglerContainer.id = 'expandable-table-row'
+                container.classList.add('expandable-table-row')
+                container.style.borderWidth = '0'
 
                 const rowId = this.resource.id.value
 
@@ -23,17 +34,17 @@ Nova.booting(app => {
                 if (element) {
 
                     element.insertAdjacentElement('afterend', container)
-                    checkbox.insertAdjacentElement('beforeend', togglerContainer)
 
-                    const vnode = createVNode(Toolbar, { toolbar: this })
-                    vnode.appContext = app._context
+                    const rowVNode = createVNode(Row, { row: this })
+                    const togglerVNode = createVNode(Toggler, { row: this })
 
-                    render(vnode, container)
+                    rowVNode.appContext = app._context
+                    togglerVNode.appContext = app._context
 
-                    const vnodeToggler = createVNode(Toggler, { toolbar: this })
-                    vnodeToggler.appContext = app._context
+                    render(rowVNode, container)
+                    render(togglerVNode, checkbox)
 
-                    render(vnodeToggler, togglerContainer)
+                    this.toDestroy.push(container, checkbox)
 
                 }
 

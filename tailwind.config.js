@@ -11,5 +11,5 @@ module.exports = {
             },
         },
     },
-    important: '#expandable-table-row',
+    important: '.expandable-table-row',
 }
