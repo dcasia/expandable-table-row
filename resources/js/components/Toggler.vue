@@ -49,7 +49,7 @@
     }
 
     table[data-testid="resource-table"] tr[dusk$="-row"] > td:first-child div.toggler {
-        @apply absolute top-0 bottom-0 flex justify-center items-center z-10 right-2;
+        @apply absolute top-0 bottom-0 flex justify-center items-center z-10 right-0;
     }
 
 </style>

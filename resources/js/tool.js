@@ -7,6 +7,7 @@ Nova.booting(app => {
     app.mixin({
         data() {
             return {
+                container: null,
                 toDestroy: [],
             }
         },
@@ -21,10 +22,13 @@ Nova.booting(app => {
 
             if (this._.type?.__file?.endsWith('ResourceTableRow.vue')) {
 
-                const container = document.createElement('tr')
+                const container = this.container = document.createElement('tr')
 
                 container.classList.add('expandable-table-row')
-                container.style.borderWidth = '0'
+
+                this.$watch('hasTableRowData', () => {
+                    container.style.borderWidth = this.hasTableRowData ? '0' : null
+                }, { immediate: true })
 
                 const rowId = this.resource.id.value
 
@@ -34,9 +38,10 @@ Nova.booting(app => {
                 if (element) {
 
                     element.insertAdjacentElement('afterend', container)
+                    element.classList.add('expandable-table-row')
 
-                    const rowVNode = createVNode(Row, { row: this })
-                    const togglerVNode = createVNode(Toggler, { row: this })
+                    const rowVNode = createVNode(Row, { row: this, hasTableRowData: this.hasTableRowData })
+                    const togglerVNode = createVNode(Toggler, { row: this, hasTableRowData: this.hasTableRowData })
 
                     rowVNode.appContext = app._context
                     togglerVNode.appContext = app._context
@@ -50,6 +55,15 @@ Nova.booting(app => {
 
             }
 
+        },
+        computed: {
+            hasTableRowData() {
+                if (this.resource) {
+                    return !!this.resource.fields.find(
+                        field => typeof field[ 'expandableRowData' ] !== 'undefined',
+                    )
+                }
+            },
         },
     })
 
