@@ -9,7 +9,6 @@ use Illuminate\Support\ServiceProvider;
 use JsonSerializable;
 use Laravel\Nova\Events\ServingNova;
 use Laravel\Nova\Fields\Field;
-use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Nova;
 
 class ExpandableTableRowServiceProvider extends ServiceProvider
