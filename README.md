@@ -1,4 +1,4 @@
-# Batch Edit Toolbar
+# Expandable Table Row
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/digital-creative/expandable-table-row)](https://packagist.org/packages/digital-creative/expandable-table-row)
 [![Total Downloads](https://img.shields.io/packagist/dt/digital-creative/expandable-table-row)](https://packagist.org/packages/digital-creative/expandable-table-row)
