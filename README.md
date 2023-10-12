@@ -2,7 +2,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/digital-creative/expandable-table-row)](https://packagist.org/packages/digital-creative/expandable-table-row)
 [![Total Downloads](https://img.shields.io/packagist/dt/digital-creative/expandable-table-row)](https://packagist.org/packages/digital-creative/expandable-table-row)
-[![License](https://img.shields.io/packagist/l/digital-creative/expandable-table-row)](https://github.com/dcasia/expandable-table-row/blob/master/LICENSE)
+[![License](https://img.shields.io/packagist/l/digital-creative/expandable-table-row)](https://github.com/dcasia/expandable-table-row/blob/main/LICENSE)
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/dcasia/expandable-table-row/main/screenshots/dark.png">
