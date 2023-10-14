@@ -13,7 +13,7 @@
         props: [ 'row' ],
         data() {
             return {
-                collapsed: false,
+                collapsed: true,
                 Nova,
             }
         },

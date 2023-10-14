@@ -39,6 +39,7 @@ Nova.booting(app => {
                 if (element) {
                     checkbox.appendChild(togglerContainer);
                     element.insertAdjacentElement('afterend', container)
+                    element.classList.add('expandable-table-row')
 
                     const rowVNode = createVNode(Row, { row: this, hasTableRowData: this.hasTableRowData })
                     const togglerVNode = createVNode(Toggler, { row: this, hasTableRowData: this.hasTableRowData })
