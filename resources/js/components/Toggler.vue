@@ -1,18 +1,10 @@
 <template>
-
-    <div class="w-8" v-if="hasTableRowData">
-
-        <div class="toggler w-[24px]" @click="toggleState" >
-
+        <ToolbarButton class="ml-2" @click="toggleState" v-if="hasTableRowData">
             <IconArrow
                 type="chevron-down"
                 class="transition-transform duration-150"
                 :class="{ 'rotate-180': collapsed }"/>
-
-        </div>
-
-    </div>
-
+        </ToolbarButton>
 </template>
 
 <script>
