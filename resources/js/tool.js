@@ -19,13 +19,14 @@ Nova.booting(app => {
 
         },
         mounted() {
+
             if (this._.type?.__file?.endsWith('ResourceTableRow.vue')) {
 
+                const togglerContainer = document.createElement('div')
                 const container = this.container = document.createElement('tr')
-                container.classList.add('expandable-table-row')
 
-		const togglerContainer = document.createElement('div');
-                togglerContainer.classList.add('inline-flex','align-middle');
+                container.classList.add('expandable-table-row')
+                togglerContainer.classList.add('inline-flex', 'align-middle')
 
                 this.$watch('hasTableRowData', () => {
                     container.style.borderWidth = this.hasTableRowData ? '0' : null
@@ -37,7 +38,9 @@ Nova.booting(app => {
                 const checkbox = document.querySelector(`table[data-testid="resource-table"] tr[dusk="${ rowId }-row"] > td`)
 
                 if (element) {
-                    checkbox.appendChild(togglerContainer);
+
+                    checkbox.appendChild(togglerContainer)
+
                     element.insertAdjacentElement('afterend', container)
                     element.classList.add('expandable-table-row')
 
@@ -53,7 +56,9 @@ Nova.booting(app => {
                     this.toDestroy.push(container, togglerContainer)
 
                 }
+
             }
+
         },
         computed: {
             hasTableRowData() {
