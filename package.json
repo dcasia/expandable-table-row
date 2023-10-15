@@ -3,6 +3,7 @@
     "scripts": {
         "watch": "mix watch",
         "production": "mix --production",
+        "prod": "npm run production",
         "nova:install": "npm --prefix='../../vendor/laravel/nova' ci"
     },
     "devDependencies": {
