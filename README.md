@@ -33,17 +33,17 @@ class UserResource extends Resource
             //...
             Text::make('First Name')->expandableRowData(function () {
                 return [
-                    Line::make(null)->displayUsing(fn() => 'Name')->asSubTitle(),
-                    Text::make('Full Name', fn(User $user) => sprintf('%s %s',$user->first_name, $user->last_name))->copyable(),
+                    Line::make(null)->displayUsing(fn () => 'Name')->asSubTitle(),
+                    Text::make('Full Name', fn (User $user) => sprintf('%s %s',$user->first_name, $user->last_name))->copyable(),
                     Text::make('Email')->copyable(),
                 ];
             }),
     
             Text::make('Last Name')->expandableRowData(function () {
                 return [
-                    Line::make(null)->displayUsing(fn() => 'Address')->asSubTitle(),
+                    Line::make(null)->displayUsing(fn () => 'Address')->asSubTitle(),
                     Text::make('Country'),
-                    Text::make('Address', fn(User $user) => sprintf(
+                    Text::make('Address', fn (User $user) => sprintf(
                         '%s, %s, %s - %s', $user->city, $user->state, $user->address, $user->zipcode
                     ))->copyable(),
                 ];
@@ -51,6 +51,23 @@ class UserResource extends Resource
             //...          
         ];
     }
+}
+```
+
+## Settings
+
+You can configure several options by using `->expandableRowOptions()`. Below, you'll find an explanation of each.
+
+```php
+public function fields(NovaRequest $request): array
+{
+    return [
+        Text::make('...')->expandableRowOptions([
+            'span' => 2, // This makes the metadata take X much more columns.
+            'expanded_by_default' => true, // This makes the table row start expanded by default.
+            'preallocate_column_width' => true, // This will avoid the table column shifting when expanding / collapsing.
+        ]),
+    ];
 }
 ```
 
