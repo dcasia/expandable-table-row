@@ -18,6 +18,10 @@ class ExpandableTableRowServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
+        Field::macro('expandableRowOptions', fn (array $options) => $this->withMeta([
+            'expandableRowOptions' => $options,
+        ]));
+
         Field::macro('expandableRowData', function (Field|Closure|array $value): static {
 
             return $this->withMeta([

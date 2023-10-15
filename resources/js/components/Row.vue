@@ -4,7 +4,16 @@
 
         <Column :collapsed="collapsed"/>
 
-        <Column v-for="({ expandableRowData }) of row.resource.fields" :collapsed="collapsed">
+        <Column v-for="({ expandableRowData, expandableRowOptions }) of row.resource.fields"
+                :collapsed="collapsed"
+                :span="expandableRowOptions?.span ?? 0">
+
+            <component
+                v-if="expandableRowOptions?.preallocate_column_width"
+                :is="'index-' + expandableRowData.component"
+                class="h-0 invisible"
+                :field="expandableRowData"
+            />
 
             <Collapse :when="!collapsed">
 
@@ -36,7 +45,9 @@
         props: [ 'row' ],
         data() {
             return {
-                collapsed: true,
+                collapsed: !this.row.resource
+                    .fields
+                    .find(({ expandableRowOptions }) => expandableRowOptions?.expanded_by_default === true),
             }
         },
         created() {
