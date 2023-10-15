@@ -5,30 +5,33 @@ declare(strict_types = 1);
 namespace DigitalCreative\ExpandableTableRow;
 
 use Closure;
+use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use JsonSerializable;
 use Laravel\Nova\Events\ServingNova;
 use Laravel\Nova\Fields\Field;
+use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Nova;
 
 class ExpandableTableRowServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        Field::macro('expandableRowData', function (Field|Closure $value): static {
+        Field::macro('expandableRowData', function (Field|Closure|array $value): static {
 
             return $this->withMeta([
                 'expandableRowData' => new class($this, $value) implements JsonSerializable {
                     public function __construct(
                         private readonly Field $parent,
-                        private readonly Field|Closure $stackField,
+                        private readonly Field|Closure|array $fields,
                     )
                     {
                     }
 
                     public function jsonSerialize(): mixed
                     {
-                        $stackField = value($this->stackField);
+                        $stackField = Stack::make(Str::random(), Arr::wrap(value($this->fields)));
                         $stackField->resolveForDisplay($this->parent->resource);
 
                         return $stackField;
