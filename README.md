@@ -22,7 +22,7 @@ composer require digital-creative/expandable-table-row
 ## Basic Usage
 
 To use the new functionality, all you need to do is add the `->expandableRowData()` method to your field definition 
-and return any class that extends Nova Field. For instance, you can create multiple lines by returning the Stack field.
+and return any class that extends Nova Field or an array of fields.
 
 ```php
 class UserResource extends Resource
@@ -32,21 +32,21 @@ class UserResource extends Resource
         return [
             //...
             Text::make('First Name')->expandableRowData(function () {
-                return Stack::make('_', [
+                return [
                     Line::make(null)->displayUsing(fn() => 'Name')->asSubTitle(),
                     Text::make('Full Name', fn(User $user) => sprintf('%s %s',$user->first_name, $user->last_name))->copyable(),
                     Text::make('Email')->copyable(),
-                ]);
+                ];
             }),
     
             Text::make('Last Name')->expandableRowData(function () {
-                return Stack::make('_', [
+                return [
                     Line::make(null)->displayUsing(fn() => 'Address')->asSubTitle(),
                     Text::make('Country'),
                     Text::make('Address', fn(User $user) => sprintf(
                         '%s, %s, %s - %s', $user->city, $user->state, $user->address, $user->zipcode
                     ))->copyable(),
-                ]);
+                ];
             }),
             //...          
         ];
