@@ -4,7 +4,7 @@
 
         <Column :collapsed="collapsed"/>
 
-        <Column v-for="({ expandableRowData, expandableRowOptions }) of row.resource.fields"
+        <Column v-for="({ expandableRowData, expandableRowOptions }) of fields"
                 :collapsed="collapsed"
                 :span="expandableRowOptions?.span ?? 0">
 
@@ -28,8 +28,6 @@
             </Collapse>
 
         </Column>
-
-        <Column :collapsed="collapsed"/>
 
     </template>
 
@@ -57,6 +55,42 @@
             Nova.$off(`collapse-toggle:${ this.row.resource.id.value }`, this.toggle)
         },
         computed: {
+            fields() {
+
+                const fields = []
+
+                let maxColumns = this.row.resource.fields.length
+                let skip = 0
+                let total = 0
+
+                for (const field of this.row.resource.fields) {
+
+                    if (skip) {
+                        skip--
+                        continue
+                    }
+
+                    const span = field.expandableRowOptions?.span || 0
+
+                    if (span) {
+                        skip = span - 1
+                    }
+
+                    fields.push(field)
+                    total += span
+
+                }
+
+                /**
+                 * Inject last column (actions column) only if there are room
+                 */
+                if (total < maxColumns) {
+                    fields.push({ span: 0 })
+                }
+
+                return fields
+
+            },
             hasTableRowData() {
                 return !!this.row.resource.fields.find(
                     field => typeof field[ 'expandableRowData' ] !== 'undefined',
