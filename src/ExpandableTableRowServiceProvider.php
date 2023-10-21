@@ -35,7 +35,13 @@ class ExpandableTableRowServiceProvider extends ServiceProvider
 
                     public function jsonSerialize(): mixed
                     {
-                        $stackField = Stack::make(Str::random(), Arr::wrap(value($this->fields)));
+                        $fields = value($this->fields);
+
+                        $stackField = match (true) {
+                            $fields instanceof Stack => $fields,
+                            default => Stack::make(Str::random(), Arr::wrap($fields)),
+                        };
+
                         $stackField->resolveForDisplay($this->parent->resource);
 
                         return $stackField;
