@@ -1,6 +1,6 @@
 <template>
 
-    <ToolbarButton class="ml-2" @click="toggleState" v-if="hasTableRowData">
+    <ToolbarButton class="ml-2 mb-1" @click="toggleState" v-if="hasTableRowData">
 
         <IconArrow
             type="chevron-down"
@@ -18,7 +18,6 @@
         data() {
             return {
                 collapsed: true,
-                Nova,
             }
         },
         methods: {

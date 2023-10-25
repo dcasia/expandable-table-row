@@ -34,8 +34,8 @@ Nova.booting(app => {
 
                 const rowId = this.resource.id.value
 
-                const element = document.querySelector(`table[data-testid="resource-table"] tr[dusk="${ rowId }-row"]`)
-                const checkbox = document.querySelector(`table[data-testid="resource-table"] tr[dusk="${ rowId }-row"] > td`)
+                const element = document.querySelector(`table[dusk="resource-table"] tr[dusk="${ rowId }-row"]`)
+                const checkbox = document.querySelector(`table[dusk="resource-table"] tr[dusk="${ rowId }-row"] > td`)
 
                 if (element) {
 
